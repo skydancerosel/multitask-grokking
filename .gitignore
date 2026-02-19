@@ -1,0 +1,14 @@
+# Model checkpoints and cached results (too large for GitHub)
+*.pt
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+nohup.out
