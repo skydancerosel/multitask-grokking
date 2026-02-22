@@ -1,6 +1,6 @@
-We extend geometric analysis of grokking to multi-task modular arithmetic, training shared-trunk Transformers on dual-task (mod-add + mod-mul) and tri-task (mod-add + mod-mul + mod-sq) objectives across a systematic weight decay sweep (up to 90 runs). We combine trajectory PCA, commutator defect analysis, Hessian eigenspectra, and causal gradient perturbations to characterize the geometry of multi-task generalization. We find that tasks grok in a fixed order with near-orthogonal heads; trajectories remain confined to an integrable low-dimensional manifold; weight decay acts as a phase parameter; solutions are holographically incompressible; and removing <10% of orthogonal gradient components eliminates grokking, revealing transverse fragility and redundant center manifolds in overparameterized models.
-
 # The Geometry of Multi-Task Grokking: Transverse Instability, Superposition, and Weight Decay Phase Structure
+
+We extend geometric analysis of grokking to multi-task modular arithmetic, training shared-trunk Transformers on dual-task (mod-add + mod-mul) and tri-task (mod-add + mod-mul + mod-sq) objectives across a systematic weight decay sweep (up to 90 runs). We combine trajectory PCA, commutator defect analysis, Hessian eigenspectra, and causal gradient perturbations to characterize the geometry of multi-task generalization. We find that tasks grok in a fixed order with near-orthogonal heads; trajectories remain confined to an integrable low-dimensional manifold; weight decay acts as a phase parameter; solutions are holographically incompressible; and removing <10% of orthogonal gradient components eliminates grokking, revealing transverse fragility and redundant center manifolds in overparameterized models.
 
 Code and figures for the paper:
 
