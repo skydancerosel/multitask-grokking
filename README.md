@@ -1,6 +1,6 @@
 # The Geometry of Multi-Task Grokking: Transverse Instability, Superposition, and Weight Decay Phase Structure
 
-We extend geometric analysis of grokking to multi-task modular arithmetic, training shared-trunk Transformers on dual-task (mod-add + mod-mul) and tri-task (mod-add + mod-mul + mod-sq) objectives across a systematic weight decay sweep (up to 90 runs). We combine trajectory PCA, commutator defect analysis, Hessian eigenspectra, and causal gradient perturbations to characterize the geometry of multi-task generalization. We find that tasks grok in a fixed order with near-orthogonal heads; trajectories remain confined to an integrable low-dimensional manifold; weight decay acts as a phase parameter; solutions are holographically incompressible; and removing <10% of orthogonal gradient components eliminates grokking, revealing transverse fragility and redundant center manifolds in overparameterized models.
+We extend geometric analysis of grokking to multi-task modular arithmetic, training shared-trunk Transformers on dual-task (mod-add + mod-mul) and tri-task (mod-add + mod-mul + mod-sq) objectives across a systematic weight decay sweep (up to 90 runs). We combine trajectory PCA, commutator defect analysis, Hessian eigenspectra, weight-SVD spectral analysis, and causal gradient perturbations to characterize the geometry of multi-task generalization. We find that tasks grok in a fixed order with near-orthogonal heads; trajectories remain confined to an integrable low-dimensional manifold; weight decay acts as a phase parameter; solutions are holographically incompressible; weight matrix spectral gaps undergo a characteristic competition-and-collapse cycle that follows the staggered grokking order; and removing <10% of orthogonal gradient components eliminates grokking, revealing transverse fragility and redundant center manifolds in overparameterized models.
 
 Code and figures for the paper:
 
@@ -9,7 +9,7 @@ Code and figures for the paper:
 
 ## Key Findings
 
-We train shared-trunk Transformers on dual-task (mod-add + mod-mul) and tri-task (mod-add + mod-mul + mod-sq) modular arithmetic across a systematic weight decay sweep (up to 90 runs), and discover five consistent phenomena:
+We train shared-trunk Transformers on dual-task (mod-add + mod-mul) and tri-task (mod-add + mod-mul + mod-sq) modular arithmetic across a systematic weight decay sweep (up to 90 runs), and discover eight consistent phenomena:
 
 1. **Staggered grokking order** &mdash; Multiplication generalizes first, followed by squaring and then addition, with consistent delays across seeds.
 
@@ -20,6 +20,12 @@ We train shared-trunk Transformers on dual-task (mod-add + mod-mul) and tri-task
 4. **Holographic incompressibility** &mdash; Solutions occupy only 4&ndash;8 PCA directions yet are distributed across full-rank weights and destroyed by minimal perturbation. Neither SVD, pruning, nor &plusmn;5% scaling preserves performance.
 
 5. **Transverse fragility and redundancy** &mdash; Removing <10% of orthogonal gradient components eliminates grokking. Dual-task models partially recover at extreme deletion (50%), suggesting redundant center manifolds; tri-task models do not.
+
+6. **Spectral edge: mode competition and collapse** &mdash; Weight matrix SVD reveals a characteristic spectral cycle in multi-task grokking: the dominant singular value gap (&sigma;&#8321; &minus; &sigma;&#8322;) narrows as modes compete, reaches a minimum concurrent with the matrix commutator &#8214;[W_Q, W_K]&#8214;_F peak, then widens as one mode dominates. Each task's spectral collapse follows the staggered grokking order (mul &rarr; sq &rarr; add). Non-grokking (wd=0) controls lack this cycle entirely.
+
+7. **Phase portrait geometry** &mdash; In (spectral gap, commutator) phase space, multi-task grokking traces the same characteristic loop as single-task: competition (near-degenerate modes) &rarr; instability (peak non-commutativity) &rarr; alignment (post-collapse, generalization). The loop structure is preserved across dual-task and tri-task models, and across the full weight decay sweep&mdash;higher weight decay produces tighter, faster loops.
+
+8. **Per-head spectral decomposition** &mdash; Layerwise and per-head spectral cascade analysis reveals that each attention head undergoes its own mode-competition cycle, with heads specializing for different tasks showing staggered spectral transitions. Commutator heatmaps confirm that head-level non-commutativity peaks are task-specific and temporally ordered.
 
 <p align="center">
   <img src="modadd_modmul/plots/figMT_K_integrability_s42.png" width="45%" alt="Integrability">
