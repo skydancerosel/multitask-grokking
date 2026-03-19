@@ -51,6 +51,8 @@ multitask-grokking/
 │   ├── eigenvector_ablation*.py    # Eigenvector ablation variants
 │   ├── postgrok_compression.py     # SVD/pruning/scaling compression tests
 │   ├── snapshot_decomposition.py   # Temporal decomposition analysis
+│   ├── spectral_analysis.py        # Weight SVD gaps, phase portraits, spectral edge verification
+│   ├── spectral_plots/             # Spectral analysis figures
 │   ├── defect_wd_comparison.py     # Cross-WD defect comparison
 │   ├── fit_wd_groktime.py          # WD vs grok time analysis
 │   └── plots/                      # 125 figures (figMT_*, figTHR_*, etc.)
@@ -64,7 +66,14 @@ multitask-grokking/
 │   ├── generalization_dynamics.py  # Defect-grokking lead time analysis
 │   ├── pca_threshold_scan.py       # Reconstruction threshold k*
 │   ├── ortho_fine_scan.py          # Fine-grained orthogonal deletion
+│   ├── spectral_analysis.py        # Weight SVD gaps, phase portraits, spectral edge verification
+│   ├── spectral_plots/             # Spectral analysis figures
 │   └── plots/                      # 79 figures (figTT_*, figTRI_*, etc.)
+│
+├── layerwise_phase_portrait.py     # Per-layer/head spectral cascade analysis
+├── commutator_heatmap.py           # Per-head/layer commutator heatmaps
+├── layerwise_phase_portraits/      # Layer cascade plots (modadd + tritask)
+├── commutator_heatmaps/            # Commutator heatmaps (modadd + tritask)
 │
 └── .gitignore              # Excludes .pt checkpoints (~20GB)
 ```
@@ -102,6 +111,7 @@ python modadd_modmul/hessian_analysis.py           # Hessian bottom eigenvalue
 python modadd_modmul/pca_threshold_scan.py         # Reconstruction threshold k*
 python modadd_modmul/postgrok_compression.py       # Compression tests (SVD, pruning, scaling)
 python modadd_modmul/gradient_projection_ablation.py  # Orthogonal gradient deletion
+python modadd_modmul/spectral_analysis.py             # Weight SVD gaps & phase portraits
 
 # ── Tri-task analyses ──
 python tri_task/pca_analysis.py
@@ -110,6 +120,11 @@ python tri_task/hessian_analysis.py
 python tri_task/pca_threshold_scan.py
 python tri_task/generalization_dynamics.py         # Defect lead time analysis
 python tri_task/ortho_fine_scan.py                 # Fine-grained deletion scan
+python tri_task/spectral_analysis.py               # Weight SVD gaps & phase portraits
+
+# ── Cross-task spectral analysis ──
+python layerwise_phase_portrait.py                 # Per-layer/head spectral cascades
+python commutator_heatmap.py                       # Per-head commutator heatmaps
 ```
 
 All scripts produce figures in their respective `plots/` directories.
@@ -127,6 +142,15 @@ All scripts produce figures in their respective `plots/` directories.
 | Defect predicts grokking | `figTT_W2_hero_defect_predicts_grok.png` | Defect onset leads grokking (tri-task) |
 | Orthogonal deletion | `figORTHO_fine_dose_response.png` | Dose-response with 10% fragility cliff |
 | Lead time | `figTT_X_defect_lead_time.png` | Defect lead time across WD |
+| SVD timeseries | `spectral_plots/fig1_master_timeseries.png` | Weight SVD spectral gaps over training |
+| Narrative test | `spectral_plots/fig2_narrative_test.png` | Spectral gap predicts grokking |
+| Phase portrait | `spectral_plots/fig3_hero_phase_portrait.png` | Spectral gap vs commutator defect |
+| Phase grid | `spectral_plots/fig4_grid_phase_portrait.png` | Grid of phase portraits across conditions |
+| Grok vs control | `spectral_plots/fig5_grok_vs_control_portrait.png` | Spectral grok vs control comparison |
+| SVD comparison | `spectral_plots/fig6_svd_grok_vs_control.png` | SVD-based grok vs control |
+| WD sweep portraits | `spectral_plots/fig7_wd_sweep_portraits.png` | Phase portraits across weight decay |
+| Layer cascades | `layerwise_phase_portraits/` | Per-layer spectral cascade plots |
+| Commutator heatmaps | `commutator_heatmaps/` | Per-head/layer commutator heatmaps |
 
 ## Companion Papers
 
