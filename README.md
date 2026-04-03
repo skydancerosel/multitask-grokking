@@ -76,6 +76,9 @@ multitask-grokking/
 │   ├── spectral_plots/             # Spectral analysis figures
 │   └── plots/                      # 79 figures (figTT_*, figTRI_*, etc.)
 │
+├── spectral/                       # Gram matrix spectral analysis
+│   └── thesis_table7_replication.py    # g₂₃, R, k* from Gram matrix (W=10)
+│
 ├── layerwise_phase_portrait.py     # Per-layer/head spectral cascade analysis
 ├── commutator_heatmap.py           # Per-head/layer commutator heatmaps
 ├── layerwise_phase_portraits/      # Layer cascade plots (modadd + tritask)
@@ -128,6 +131,9 @@ python tri_task/generalization_dynamics.py         # Defect lead time analysis
 python tri_task/ortho_fine_scan.py                 # Fine-grained deletion scan
 python tri_task/spectral_analysis.py               # Weight SVD gaps & phase portraits
 
+# ── Gram matrix spectral analysis ──
+python spectral/thesis_table7_replication.py       # g₂₃, R, k* from Gram matrix
+
 # ── Cross-task spectral analysis ──
 python layerwise_phase_portrait.py                 # Per-layer/head spectral cascades
 python commutator_heatmap.py                       # Per-head commutator heatmaps
@@ -157,6 +163,19 @@ All scripts produce figures in their respective `plots/` directories.
 | WD sweep portraits | `spectral_plots/fig7_wd_sweep_portraits.png` | Phase portraits across weight decay |
 | Layer cascades | `layerwise_phase_portraits/` | Per-layer spectral cascade plots |
 | Commutator heatmaps | `commutator_heatmaps/` | Per-head/layer commutator heatmaps |
+| Gram matrix g₂₃ | `spectral/coherence_edge_plots/` | Gram matrix eigenvalue gap decline (18/18 grokking, 1/18 control) |
+
+## Gram Matrix Spectral Analysis
+
+Replication of the intra-signal gap framework ([Xu 2026, arXiv:2603.28964](https://arxiv.org/abs/2603.28964)). Computes three quantities from the rolling-window Gram matrix (W=10) of flattened attention-weight updates across all single-task, dual-task, and tri-task runs:
+
+| Quantity | Definition | WD > 0 (grokking) | WD = 0 (control) |
+|----------|------------|-------------------|-------------------|
+| g₂₃ | σ₂² − σ₃² of Gram matrix | Declines 8–111× before grokking (18/18) | No decline (1/18) |
+| R | σ_{k\*}/σ_{k\*+1} gap ratio | 1.39 ± 0.08 | 2.51 ± 0.56 |
+| k\* (weighted) | Signal rank | k\*=1 in 15/18 (83%) | Spread across 1–9 |
+
+Script: `spectral/thesis_table7_replication.py`
 
 ## Companion Papers
 
